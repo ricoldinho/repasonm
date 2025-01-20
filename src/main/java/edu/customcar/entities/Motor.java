@@ -1,6 +1,9 @@
 package edu.customcar.entities;
 
+import java.util.LinkedList;
+
 import edu.customcar.entities.enumerated.Combustible;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -8,6 +11,9 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -25,6 +31,8 @@ public class Motor {
     @Column(name = "combustible", nullable = false, columnDefinition = "ENUM('GAS', 'DIESEL', 'ELECTRIC', 'HYBRID', 'JASOE')")
     @Enumerated(EnumType.STRING)
     private Combustible combustible;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "motor")
+    private LinkedList<Coche> cochesList;
 
     public Motor() {
     }
@@ -35,6 +43,18 @@ public class Motor {
         this.cilindrada = cilindrada;
         this.potencia = potencia;
         this.combustible = combustible;
+    }
+
+    
+
+    public Motor(Long id, String fabricante, Integer cilindrada, Integer potencia, Combustible combustible,
+            LinkedList<Coche> cochesList) {
+        this.id = id;
+        this.fabricante = fabricante;
+        this.cilindrada = cilindrada;
+        this.potencia = potencia;
+        this.combustible = combustible;
+        this.cochesList = cochesList;
     }
 
     public Long getId() {
@@ -77,11 +97,21 @@ public class Motor {
         this.combustible = combustible;
     }
 
+    public LinkedList<Coche> getCochesList() {
+        return cochesList;
+    }
+
+    public void setCochesList(LinkedList<Coche> cochesList) {
+        this.cochesList = cochesList;
+    }
+
     @Override
     public String toString() {
         return "Motor [id=" + id + ", fabricante=" + fabricante + ", cilindrada=" + cilindrada + ", potencia="
-                + potencia + ", combustible=" + combustible + "]";
+                + potencia + ", combustible=" + combustible + ", cochesList=" + cochesList + "]";
     }
+
+    
 
     
     
