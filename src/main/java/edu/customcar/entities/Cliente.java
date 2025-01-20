@@ -1,10 +1,14 @@
 package edu.customcar.entities;
 
+import java.util.LinkedList;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,6 +20,8 @@ public class Cliente {
     private Long id;
     @Column(name="dni", length=10, nullable=false)
     private String dni;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
+    private LinkedList<Venta> ventasList;
 
     public Cliente(){}
 

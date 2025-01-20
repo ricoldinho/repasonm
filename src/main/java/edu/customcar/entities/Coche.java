@@ -15,6 +15,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -36,6 +37,8 @@ public class Coche {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "coches_ruedas", joinColumns = @JoinColumn(name = "coche_id"), inverseJoinColumns = @JoinColumn(name = "rueda_id"))
     private LinkedList<Rueda> ruedasList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "coche")
+    private LinkedList<Venta> ventasList;
     
     public Coche() {
     }
