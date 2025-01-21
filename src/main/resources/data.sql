@@ -9,6 +9,26 @@ INSERT INTO motores (fabricante, cilindrada, potencia, combustible) VALUES ('HON
 INSERT INTO motores (fabricante, cilindrada, potencia, combustible) VALUES ('TOYOTA', 1500 , 80, 'HYBRID');  
 
 
-INSERT INTO coches (marca, modelo, tipo) VALUES ('Audi', 'A3', 'COUPE');
-INSERT INTO coches (marca, modelo, tipo) VALUES ('BMW', 'Serie 3', 'SEDAN');
+INSERT INTO coches (marca, modelo, tipo, motor_id) VALUES ('Audi', 'A3', 'COUPE', 2);
+INSERT INTO coches (marca, modelo, tipo, motor_id) VALUES ('BMW', 'Serie 3', 'SEDAN', 4);
+INSERT INTO coches (marca, modelo, tipo, motor_id) VALUES ('Mercedes', 'Clase B', 'COUPE', 1);
 
+INSERT INTO coches_ruedas (coche_id, rueda_id) VALUES (1, 1);
+INSERT INTO coches_ruedas (coche_id, rueda_id) VALUES (1, 1);
+INSERT INTO coches_ruedas (coche_id, rueda_id) VALUES (1, 1);
+INSERT INTO coches_ruedas (coche_id, rueda_id) VALUES (1, 1);
+INSERT INTO coches_ruedas (coche_id, rueda_id) VALUES (2, 2);
+INSERT INTO coches_ruedas (coche_id, rueda_id) VALUES (2, 2);
+INSERT INTO coches_ruedas (coche_id, rueda_id) VALUES (2, 2);
+INSERT INTO coches_ruedas (coche_id, rueda_id) VALUES (2, 2);
+INSERT INTO coches_ruedas (coche_id, rueda_id) VALUES (3, 4);
+INSERT INTO coches_ruedas (coche_id, rueda_id) VALUES (3, 4);
+INSERT INTO coches_ruedas (coche_id, rueda_id) VALUES (3, 3);
+INSERT INTO coches_ruedas (coche_id, rueda_id) VALUES (3, 3);
+
+INSERT INTO clientes (dni) VALUES ('12345678P');
+INSERT INTO clientes (dni) VALUES ('88888888Z');
+
+INSERT INTO ventas (coche_id, cliente_id, fecha_venta, precio) VALUES (1, 1, '2024-01-02', 100000);
+INSERT INTO ventas (coche_id, cliente_id, fecha_venta, precio) VALUES (2, 2, '2024-01-02', 30000);
+INSERT INTO ventas (coche_id, cliente_id, fecha_venta, precio) VALUES (3, 2, '2024-06-02', 500000);
