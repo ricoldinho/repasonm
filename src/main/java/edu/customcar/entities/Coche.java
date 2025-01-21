@@ -118,10 +118,18 @@ public class Coche {
         this.ruedasList = ruedasList;
     }
 
+    public LinkedList<Venta> getVentasList() {
+        return ventasList;
+    }
+
+    public void setVentasList(LinkedList<Venta> ventasList) {
+        this.ventasList = ventasList;
+    }
+
     @Override
     public String toString() {
-        return "Coche [id=" + id + ", marca=" + marca + ", modelo=" + modelo + ", tipo=" + tipo + ", motor=" + motor
-                + ", ruedasList=" + ruedasList + "]";
+        return "Coche [id=" + id + ", marca=" + marca + ", modelo=" + modelo + ", tipo=" + tipo + ", motor=" + motor.getFabricante()
+                  + "]";
     }
 
    

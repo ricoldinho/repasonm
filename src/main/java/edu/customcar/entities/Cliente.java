@@ -46,9 +46,17 @@ public class Cliente {
         this.dni = dni;
     }
 
+    public LinkedList<Venta> getVentasList() {
+        return ventasList;
+    }
+
+    public void setVentasList(LinkedList<Venta> ventasList) {
+        this.ventasList = ventasList;
+    }
+
     @Override
     public String toString() {
-        return "Cliente [id=" + id + ", dni=" + dni + "]";
+        return "Cliente [id=" + id + ", dni=" + dni + ", ventasList=" + ventasList + "]";
     }
 
     

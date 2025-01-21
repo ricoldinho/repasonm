@@ -1,5 +1,7 @@
 package edu.customcar.entities;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import edu.customcar.entities.enumerated.Combustible;
@@ -30,7 +32,7 @@ public class Motor {
     @Enumerated(EnumType.STRING)
     private Combustible combustible;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "motor")
-    private LinkedList<Coche> cochesList;
+    private ArrayList<Coche> cochesList;
 
     public Motor() {
     }
@@ -46,7 +48,7 @@ public class Motor {
     
 
     public Motor(Long id, String fabricante, Integer cilindrada, Integer potencia, Combustible combustible,
-            LinkedList<Coche> cochesList) {
+            ArrayList<Coche> cochesList) {
         this.id = id;
         this.fabricante = fabricante;
         this.cilindrada = cilindrada;
@@ -95,11 +97,11 @@ public class Motor {
         this.combustible = combustible;
     }
 
-    public LinkedList<Coche> getCochesList() {
+    public ArrayList<Coche> getCochesList() {
         return cochesList;
     }
 
-    public void setCochesList(LinkedList<Coche> cochesList) {
+    public void setCochesList(ArrayList<Coche> cochesList) {
         this.cochesList = cochesList;
     }
 
