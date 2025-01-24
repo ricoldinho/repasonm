@@ -1,10 +1,14 @@
 package edu.customcar.entities;
 
 import java.util.LinkedList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -20,8 +24,9 @@ public class Cliente {
     private Long id;
     @Column(name="dni", length=10, nullable=false)
     private String dni;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
-    private LinkedList<Venta> ventasList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente", fetch = FetchType.EAGER)
+    @JsonIgnore
+    private List<Venta> ventasList;
 
     public Cliente(){}
 
@@ -46,11 +51,11 @@ public class Cliente {
         this.dni = dni;
     }
 
-    public LinkedList<Venta> getVentasList() {
+    public List<Venta> getVentasList() {
         return ventasList;
     }
 
-    public void setVentasList(LinkedList<Venta> ventasList) {
+    public void setVentasList(List<Venta> ventasList) {
         this.ventasList = ventasList;
     }
 

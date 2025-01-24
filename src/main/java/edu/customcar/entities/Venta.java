@@ -2,6 +2,8 @@ package edu.customcar.entities;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,6 +26,7 @@ public class Venta {
     private Cliente cliente;
     @ManyToOne
     @JoinColumn(name = "coche_id")
+    @JsonIgnore
     private Coche coche;
     
     @Temporal(TemporalType.DATE)

@@ -1,6 +1,9 @@
 package edu.customcar.entities;
 
-import java.util.LinkedList;
+import java.util.List;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import edu.customcar.entities.enumerated.Tipo;
 import jakarta.persistence.CascadeType;
@@ -8,12 +11,11 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -31,14 +33,12 @@ public class Coche {
     @Column(name = "tipo", nullable = false, columnDefinition = "ENUM('COUPE', 'SEDAN', 'CONVERTIBLE', 'SUV', 'TRUCK', 'VAN', 'WAGON', 'TOURISM')")
     @Enumerated(EnumType.STRING)
     private Tipo tipo;
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "motor_id")
     private Motor motor;
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "coches_ruedas", joinColumns = @JoinColumn(name = "coche_id"), inverseJoinColumns = @JoinColumn(name = "rueda_id"))
-    private LinkedList<Rueda> ruedasList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "coche")
-    private LinkedList<Venta> ventasList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "coche", fetch = FetchType.EAGER)
+    private List<Venta> ventasList;
     
     public Coche() {
     }
@@ -57,17 +57,6 @@ public class Coche {
         this.modelo = modelo;
         this.tipo = tipo;
         this.motor = motor;
-    }
-
-    
-
-    public Coche(Long id, String marca, String modelo, Tipo tipo, Motor motor, LinkedList<Rueda> ruedasList) {
-        this.id = id;
-        this.marca = marca;
-        this.modelo = modelo;
-        this.tipo = tipo;
-        this.motor = motor;
-        this.ruedasList = ruedasList;
     }
 
     public Long getId() {
@@ -110,19 +99,11 @@ public class Coche {
         this.motor = motor;
     }
 
-    public LinkedList<Rueda> getRuedasList() {
-        return ruedasList;
-    }
-
-    public void setRuedasList(LinkedList<Rueda> ruedasList) {
-        this.ruedasList = ruedasList;
-    }
-
-    public LinkedList<Venta> getVentasList() {
+    public List<Venta> getVentasList() {
         return ventasList;
     }
 
-    public void setVentasList(LinkedList<Venta> ventasList) {
+    public void setVentasList(List<Venta> ventasList) {
         this.ventasList = ventasList;
     }
 

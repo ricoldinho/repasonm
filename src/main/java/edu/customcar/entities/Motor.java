@@ -3,6 +3,9 @@ package edu.customcar.entities;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import edu.customcar.entities.enumerated.Combustible;
 import jakarta.persistence.CascadeType;
@@ -10,6 +13,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -31,8 +35,10 @@ public class Motor {
     @Column(name = "combustible", nullable = false, columnDefinition = "ENUM('GAS', 'DIESEL', 'ELECTRIC', 'HYBRID', 'JASOE')")
     @Enumerated(EnumType.STRING)
     private Combustible combustible;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "motor")
-    private ArrayList<Coche> cochesList;
+   
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "motor", fetch = FetchType.EAGER)
+    @JsonIgnore
+    private List<Coche> cochesList = new ArrayList<>();
 
     public Motor() {
     }
@@ -97,18 +103,18 @@ public class Motor {
         this.combustible = combustible;
     }
 
-    public ArrayList<Coche> getCochesList() {
+    public List<Coche> getCochesList() {
         return cochesList;
     }
 
-    public void setCochesList(ArrayList<Coche> cochesList) {
+    public void setCochesList(List<Coche> cochesList) {
         this.cochesList = cochesList;
     }
 
     @Override
     public String toString() {
         return "Motor [id=" + id + ", fabricante=" + fabricante + ", cilindrada=" + cilindrada + ", potencia="
-                + potencia + ", combustible=" + combustible + ", cochesList=" + cochesList + "]";
+                + potencia + ", combustible=" + combustible  + "]";
     }
 
     
